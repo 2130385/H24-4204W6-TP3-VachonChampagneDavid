@@ -15,6 +15,6 @@ namespace Labo8api.Data
         {
         }
 
-        public DbSet<TP3.Models.Score> Score { get; set; } = default!;
+        public DbSet<Score> Scores { get; set; } = default!;
     }
 }
