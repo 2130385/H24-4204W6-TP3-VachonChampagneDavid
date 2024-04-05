@@ -9,13 +9,13 @@ using TP3.Models;
 
 namespace TP3.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class ScoreController : ControllerBase
+    public class ScoresController : ControllerBase
     {
         private ScoreService _scoreService;
 
-        public ScoreController(ScoreService scoreService)
+        public ScoresController(ScoreService scoreService)
         {
             _scoreService = scoreService;
         }
@@ -44,7 +44,7 @@ namespace TP3.Controllers
         }
 
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> ChangeScoreVisibility(int id)
         {
             try
@@ -65,8 +65,8 @@ namespace TP3.Controllers
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             try
             {
-                var createdScore = await _scoreService.AddScoreAsync(score, userId);
-                return CreatedAtAction(nameof(PostScore), new { id = createdScore.Id }, createdScore);
+                await _scoreService.AddScoreAsync(score, userId);
+                return Ok();
             }
             catch (Exception ex)
             {

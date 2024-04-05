@@ -33,7 +33,7 @@ namespace TP3.Data
                 score.IsPublic = !score.IsPublic;
                 await _context.SaveChangesAsync();
             }
-            // Handle the case if score is not found
+            throw new ArgumentException("Score not found.");
         }
 
         public async Task AddScoreAsync(Score score, string userId)
@@ -47,7 +47,7 @@ namespace TP3.Data
                 _context.Scores.Add(score);
                 await _context.SaveChangesAsync();
             }
-            // Handle the case if user is not found
+            throw new ArgumentException("Score not found.");
         }
 
     }

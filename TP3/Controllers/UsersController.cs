@@ -11,12 +11,12 @@ namespace TP3.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         UserManager<User> UserManager;
         IConfiguration Config;
 
-        public UserController(UserManager<User> userManager, IConfiguration configuration)
+        public UsersController(UserManager<User> userManager, IConfiguration configuration)
         {
             UserManager = userManager;
             this.Config = configuration;
