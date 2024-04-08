@@ -39,8 +39,10 @@ namespace TP3.Controllers
             var result = await UserManager.CreateAsync(user, register.Password);
             if (!result.Succeeded)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Une erreur est survenue lors de la création de l'utilisateur." });
+                var errors = result.Errors.Select(e => e.Description).ToList();
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Une erreur est survenue lors de la création de l'utilisateur.", Errors = errors });
             }
+
 
             return Ok();
         }

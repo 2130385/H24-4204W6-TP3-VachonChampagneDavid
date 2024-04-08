@@ -60,12 +60,23 @@ namespace TP3.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<Score>> PostScore(Score score)
+        public async Task<ActionResult<Score>> PostScore(string score, string time)
         {
+            Score scoreToAdd = new Score();
+            scoreToAdd.ScoreValue = int.Parse(score);
+            scoreToAdd.TimeInSeconds = time;
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if(userId == null)
+            {
+                scoreToAdd.IsPublic = true;
+            }
+            else
+            {
+                scoreToAdd.IsPublic = false;
+            }
             try
             {
-                await _scoreService.AddScoreAsync(score, userId);
+                await _scoreService.AddScoreAsync(scoreToAdd, userId);
                 return Ok();
             }
             catch (Exception ex)

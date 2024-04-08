@@ -12,6 +12,8 @@ export class AppComponent {
   logout(){
 
     // ██ Supprimer le token juste ici ! ██
+    console.log(localStorage.getItem('token'));
+    localStorage.removeItem('token');
 
     let darkScreen : HTMLElement | null = document.querySelector("#darkScreen");
     if(darkScreen == null) return;

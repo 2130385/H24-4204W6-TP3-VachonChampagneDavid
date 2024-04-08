@@ -18,7 +18,7 @@ namespace TP3.Data
         {
             return await _context.Scores.Where(score => score.IsPublic).ToListAsync();
         }
-
+        
         public async Task<IEnumerable<Score>> GetMyScoresAsync(string userId)
         {
             var user = await _context.Users.Include(u => u.Scores).FirstOrDefaultAsync(u => u.Id == userId);
@@ -42,8 +42,9 @@ namespace TP3.Data
             if (user != null)
             {
                 score.User = user;
+                score.Pseudo = score.User.UserName;
+                score.Date = DateTime.Now.ToString();
                 user.Scores.Add(score);
-
                 _context.Scores.Add(score);
                 await _context.SaveChangesAsync();
             }
