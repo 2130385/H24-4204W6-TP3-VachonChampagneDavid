@@ -19,6 +19,7 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.28" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Core" Version="6.0.16" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="xunit.extensibility.execution" Version="2.7.0" />
   </ItemGroup>
 
 </Project>

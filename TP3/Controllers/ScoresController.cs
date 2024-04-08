@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Diagnostics;
 using System.Security.Claims;
 using TP3.Data;
 using TP3.Models;
@@ -62,6 +63,7 @@ namespace TP3.Controllers
         [HttpPost]
         public async Task<ActionResult<Score>> PostScore(string score, string time)
         {
+            Debug.WriteLine(score);
             Score scoreToAdd = new Score();
             scoreToAdd.ScoreValue = int.Parse(score);
             scoreToAdd.TimeInSeconds = time;

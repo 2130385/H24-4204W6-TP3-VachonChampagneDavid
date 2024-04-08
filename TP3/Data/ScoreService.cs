@@ -1,6 +1,7 @@
 ﻿using Labo8api.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using TP3.Models;
 
 namespace TP3.Data
@@ -38,6 +39,7 @@ namespace TP3.Data
 
         public async Task AddScoreAsync(Score score, string userId)
         {
+            Debug.WriteLine("test");
             var user = await _context.Users.FindAsync(userId);
             if (user != null)
             {

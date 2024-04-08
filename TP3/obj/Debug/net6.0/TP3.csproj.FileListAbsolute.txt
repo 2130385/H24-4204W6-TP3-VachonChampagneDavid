@@ -504,3 +504,6 @@ C:\Users\david\Desktop\H24-4204W6-TP3-VachonChampagneDavid\TP3\obj\Debug\net6.0\
 C:\Users\david\Desktop\H24-4204W6-TP3-VachonChampagneDavid\TP3\obj\Debug\net6.0\TP3.csproj.CopyComplete
 C:\Users\david\Desktop\H24-4204W6-TP3-VachonChampagneDavid\TP3\obj\Debug\net6.0\TP3.genruntimeconfig.cache
 C:\Users\david\Desktop\H24-4204W6-TP3-VachonChampagneDavid\TP3\obj\Debug\net6.0\ref\TP3.dll
+C:\Users\david\Desktop\H24-4204W6-TP3-VachonChampagneDavid\TP3\bin\Debug\net6.0\xunit.abstractions.dll
+C:\Users\david\Desktop\H24-4204W6-TP3-VachonChampagneDavid\TP3\bin\Debug\net6.0\xunit.core.dll
+C:\Users\david\Desktop\H24-4204W6-TP3-VachonChampagneDavid\TP3\bin\Debug\net6.0\xunit.execution.dotnet.dll

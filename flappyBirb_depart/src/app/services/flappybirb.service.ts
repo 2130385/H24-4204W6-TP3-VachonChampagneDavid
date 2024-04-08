@@ -41,8 +41,17 @@ export class FlappyBirbService {
     return this.http.put(this.baseUrl + "Scores/ChangeScoreVisibility/" + scoreid, { scoreid })
   }
 
-  async PostScore(score : string, time: string): Promise<void> {
-    let x = await this.http.post<any>(this.baseUrl + "Scores/PostScore", { score, time });
+  async PostScore(score: string, time: string): Promise<void> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ` + token
+      })
+    };
+  
+    console.log(this.baseUrl + "Scores/PostScore", { score, time });
+    let x = await lastValueFrom(this.http.post<any>(this.baseUrl + "Scores/PostScore", { score, time }, httpOptions));
     console.log(x);
   }
 

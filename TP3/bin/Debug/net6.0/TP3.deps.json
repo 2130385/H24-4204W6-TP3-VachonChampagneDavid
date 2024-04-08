@@ -16,7 +16,8 @@
           "Microsoft.Extensions.Identity.Core": "6.0.28",
           "Microsoft.Extensions.Identity.Stores": "6.0.28",
           "Microsoft.VisualStudio.Web.CodeGeneration.Core": "6.0.16",
-          "Swashbuckle.AspNetCore": "6.5.0"
+          "Swashbuckle.AspNetCore": "6.5.0",
+          "xunit.extensibility.execution": "2.7.0"
         },
         "runtime": {
           "TP3.dll": {}
@@ -2685,6 +2686,36 @@
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
         }
+      },
+      "xunit.abstractions/2.0.3": {
+        "runtime": {
+          "lib/netstandard2.0/xunit.abstractions.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
+      },
+      "xunit.extensibility.core/2.7.0": {
+        "dependencies": {
+          "xunit.abstractions": "2.0.3"
+        },
+        "runtime": {
+          "lib/netstandard1.1/xunit.core.dll": {
+            "assemblyVersion": "2.7.0.0",
+            "fileVersion": "2.7.0.0"
+          }
+        }
+      },
+      "xunit.extensibility.execution/2.7.0": {
+        "dependencies": {
+          "xunit.extensibility.core": "2.7.0"
+        },
+        "runtime": {
+          "lib/netstandard1.1/xunit.execution.dotnet.dll": {
+            "assemblyVersion": "2.7.0.0",
+            "fileVersion": "2.7.0.0"
+          }
+        }
       }
     }
   },
@@ -4331,6 +4362,27 @@
       "sha512": "sha512-lJ8AxvkX7GQxpC6GFCeBj8ThYVyQczx2+f/cWHJU8tjS7YfI6Cv6bon70jVEgs2CiFbmmM8b9j1oZVx0dSI2Ww==",
       "path": "system.xml.xmldocument/4.3.0",
       "hashPath": "system.xml.xmldocument.4.3.0.nupkg.sha512"
+    },
+    "xunit.abstractions/2.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pot1I4YOxlWjIb5jmwvvQNbTrZ3lJQ+jUGkGjWE3hEFM0l5gOnBWS+H3qsex68s5cO52g+44vpGzhAt+42vwKg==",
+      "path": "xunit.abstractions/2.0.3",
+      "hashPath": "xunit.abstractions.2.0.3.nupkg.sha512"
+    },
+    "xunit.extensibility.core/2.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JLnx4PI0vn1Xr1Ust6ydrp2t/ktm2dyGPAVoDJV5gQuvBMSbd2K7WGzODa2ttiz030CeQ8nbsXl05+cvf7QNyA==",
+      "path": "xunit.extensibility.core/2.7.0",
+      "hashPath": "xunit.extensibility.core.2.7.0.nupkg.sha512"
+    },
+    "xunit.extensibility.execution/2.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bjY+crT1jOyxKagFjCMdEVzoenO2v66ru8+CK/0UaXvyG4U9Q3UTieJkbQXbi7/1yZIK1sGh01l5/jh2CwLJtQ==",
+      "path": "xunit.extensibility.execution/2.7.0",
+      "hashPath": "xunit.extensibility.execution.2.7.0.nupkg.sha512"
     }
   }
 }

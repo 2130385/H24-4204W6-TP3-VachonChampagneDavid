@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mvfERoffs9v86wiiwnQQ18kwiBQat1IlPS6/JksEjhXwTFJcoUa3SDU5GB1YtbL7b8WvLkBFGYyEMHC60Vs/iQ==",
+  "dgSpecHash": "Ik3DHhZp068Lf3PZIiyUxevlgw3eOpRuVvsm4mtyuMoV+l1eczOvFte4+llxEiSeOjxZPU5NS8hAhwL3giJQWQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\david\\Desktop\\H24-4204W6-TP3-VachonChampagneDavid\\TP3\\TP3.csproj",
   "expectedPackageFiles": [
@@ -237,7 +237,10 @@
     "C:\\Users\\david\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\david\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\david\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\david\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\david\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\david\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
+    "C:\\Users\\david\\.nuget\\packages\\xunit.extensibility.core\\2.7.0\\xunit.extensibility.core.2.7.0.nupkg.sha512",
+    "C:\\Users\\david\\.nuget\\packages\\xunit.extensibility.execution\\2.7.0\\xunit.extensibility.execution.2.7.0.nupkg.sha512"
   ],
   "logs": []
 }
