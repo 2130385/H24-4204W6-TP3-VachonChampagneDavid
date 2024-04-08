@@ -61,30 +61,14 @@ namespace TP3.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<Score>> PostScore(string score, string time)
+        public async Task<ActionResult<Score>> PostScore(ScoreDTO scoredto)
         {
-            Debug.WriteLine(score);
-            Score scoreToAdd = new Score();
-            scoreToAdd.ScoreValue = int.Parse(score);
-            scoreToAdd.TimeInSeconds = time;
+            var score = new Score();
+            score.ScoreValue = scoredto.ScoreValue;
+            score.TimeInSeconds = scoredto.TimeInSeconds;
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if(userId == null)
-            {
-                scoreToAdd.IsPublic = true;
-            }
-            else
-            {
-                scoreToAdd.IsPublic = false;
-            }
-            try
-            {
-                await _scoreService.AddScoreAsync(scoreToAdd, userId);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
-            }
+            await _scoreService.AddScoreAsync(score, userId);
+            return Ok();
         }
     }
 }

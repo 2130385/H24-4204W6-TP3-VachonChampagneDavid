@@ -17,7 +17,7 @@
       <img id="reaction" src="/assets/images/sad.png" alt="Duo">
       <div>
         <button color="primary" mat-raised-button (click)="replay()">Rejouer</button>
-        <button *ngIf="!scoreSent" color="primary" mat-raised-button (click)="sendScore()">Envoyer le score</button>
+        <button *ngIf="!scoreSent && isAuthenticated" color="primary" mat-raised-button (click)="sendScore()">Envoyer le score</button>
       </div>
     </mat-card-content>
   </mat-card>

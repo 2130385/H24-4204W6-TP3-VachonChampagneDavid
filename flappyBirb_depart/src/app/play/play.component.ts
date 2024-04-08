@@ -12,6 +12,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   game: Game | null = null;
   scoreSent: boolean = false;
+  isAuthenticated: boolean = false;
 
   constructor(private flappyBirbService: FlappyBirbService) { }
 
@@ -22,6 +23,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.game = new Game();
+    this.isAuthenticated = this.flappyBirbService.isAuthenticated;
     console.log(localStorage.getItem("token"));
   }
 
@@ -45,7 +47,6 @@ export class PlayComponent implements OnInit, OnDestroy {
     try {
       if (localStorage.getItem("token") !== null) {
         if (score !== null && time !== null) {
-          console.log(score, time);
           await this.flappyBirbService.PostScore(score, time);
         } else {
           console.error("Score or time is null.");

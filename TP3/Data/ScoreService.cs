@@ -39,7 +39,6 @@ namespace TP3.Data
 
         public async Task AddScoreAsync(Score score, string userId)
         {
-            Debug.WriteLine("test");
             var user = await _context.Users.FindAsync(userId);
             if (user != null)
             {
@@ -50,7 +49,6 @@ namespace TP3.Data
                 _context.Scores.Add(score);
                 await _context.SaveChangesAsync();
             }
-            throw new ArgumentException("Score not found.");
         }
 
     }
