@@ -9,9 +9,9 @@ import { FlappyBirbService } from '../services/flappybirb.service';
 })
 export class ScoreComponent implements OnInit {
 
-  myScores : Score[] = [];
-  publicScores : Score[] = [];
-  userIsConnected : boolean = false;
+  myScores: Score[] = [];
+  publicScores: Score[] = [];
+  userIsConnected: boolean = false;
 
   constructor(private flappyBirbService: FlappyBirbService) { }
 
@@ -19,12 +19,13 @@ export class ScoreComponent implements OnInit {
     this.userIsConnected = sessionStorage.getItem("token") !== null;
     console.log(localStorage.getItem("token"));
     this.userIsConnected = this.flappyBirbService.isAuthenticated;
-
     await this.loadPublicScores();
-    await this.loadMyScores();
+    if (this.userIsConnected) {
+      await this.loadMyScores();
+    }
   }
 
-  async changeScoreVisibility(score : Score){
+  async changeScoreVisibility(score: Score) {
     try {
       await this.flappyBirbService.ChangeScoreVisibility(score.id);
     } catch (error) {

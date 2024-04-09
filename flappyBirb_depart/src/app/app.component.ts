@@ -17,6 +17,7 @@ export class AppComponent {
     this.flappyBirbService.isAuthenticated = false;
     // ██ Supprimer le token juste ici ! ██
     localStorage.removeItem('token');
+    window.location.reload();
 
 
     let darkScreen : HTMLElement | null = document.querySelector("#darkScreen");

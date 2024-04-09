@@ -29,7 +29,9 @@ export class FlappyBirbService {
 
   async GetPublicScores(): Promise<Score[]> {
     const response = await this.http.get<any>(this.baseUrl + "Scores/GetPublicScores", this.getHttpOptions()).toPromise();
-    return response;
+    const sortedScores = response.sort((a : Score, b :  Score) => b.scoreValue - a.scoreValue);
+    const top10Scores = sortedScores.slice(0, 10);
+    return top10Scores;
   }
 
   async GetMyScores(): Promise<Score[]> {
