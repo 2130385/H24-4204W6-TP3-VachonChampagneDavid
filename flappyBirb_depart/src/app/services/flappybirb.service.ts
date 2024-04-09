@@ -37,8 +37,9 @@ export class FlappyBirbService {
     return response;
   }
   
-  async ChangeScoreVisibility(scoreid : number): Promise<Observable<any>> {
-    return await this.http.put(this.baseUrl + "Scores/ChangeScoreVisibility/" + scoreid, { scoreid }, this.getHttpOptions())
+  async ChangeScoreVisibility(scoreid : number): Promise<void> {
+    let x = await lastValueFrom(this.http.put(this.baseUrl + "Scores/ChangeScoreVisibility/" + scoreid, { scoreid }, this.getHttpOptions()));
+    console.log("La visibilité du score avec l'id " + scoreid + " a été changée");
   }
 
   async PostScore(scoreValue: string, timeInSeconds: string): Promise<void> {

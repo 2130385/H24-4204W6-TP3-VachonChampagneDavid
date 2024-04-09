@@ -30,6 +30,7 @@ export class ScoreComponent implements OnInit {
     } catch (error) {
       console.error("Error changing score visibility", error);
     }
+    window.location.reload();
   }
 
 

@@ -23,7 +23,6 @@ namespace TP3.Data
         public async Task<IEnumerable<Score>> GetMyScoresAsync(string userId)
         {
             var user = await _context.Users.Include(u => u.Scores).FirstOrDefaultAsync(u => u.Id == userId);
-            //Debug.WriteLine(user.Scores[1]);
             return user?.Scores;
         }
 
@@ -35,7 +34,6 @@ namespace TP3.Data
                 score.IsPublic = !score.IsPublic;
                 await _context.SaveChangesAsync();
             }
-            throw new ArgumentException("Score not found.");
         }
 
         public async Task AddScoreAsync(Score score, string userId)
