@@ -23,8 +23,15 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.game = new Game();
-    this.isAuthenticated = this.flappyBirbService.isAuthenticated;
-    console.log(localStorage.getItem("token"));
+    setTimeout(() => {
+      this.isAuthenticated = this.flappyBirbService.isAuthenticated;
+      if(this.isAuthenticated){
+        console.log("Utilisateur connecté : " + localStorage.getItem("username"));
+      } else {
+        console.log("Aucun utilisateur connecté.");
+      }
+    }, 1000);
+    
   }
 
   replay() {

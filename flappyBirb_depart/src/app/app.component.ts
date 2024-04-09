@@ -10,13 +10,13 @@ export class AppComponent {
   
   toggleLogout : boolean = true;
 
-  constructor(private flappyBirbService: FlappyBirbService) { }
+  constructor() { }
 
   logout(){
 
-    this.flappyBirbService.isAuthenticated = false;
     // ██ Supprimer le token juste ici ! ██
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
     window.location.reload();
 
 
