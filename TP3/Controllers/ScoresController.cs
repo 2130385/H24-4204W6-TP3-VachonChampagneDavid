@@ -36,6 +36,7 @@ namespace TP3.Controllers
         public async Task<ActionResult<IEnumerable<Score>>> GetMyScores()
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Debug.WriteLine(userId);
             var myScores = await _scoreService.GetMyScoresAsync(userId);
             if (myScores == null)
             {

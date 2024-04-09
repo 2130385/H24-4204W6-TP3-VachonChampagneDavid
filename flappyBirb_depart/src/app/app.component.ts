@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FlappyBirbService } from './services/flappybirb.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,14 @@ export class AppComponent {
   
   toggleLogout : boolean = true;
 
+  constructor(private flappyBirbService: FlappyBirbService) { }
+
   logout(){
 
+    this.flappyBirbService.isAuthenticated = false;
     // ██ Supprimer le token juste ici ! ██
-    console.log(localStorage.getItem('token'));
     localStorage.removeItem('token');
+
 
     let darkScreen : HTMLElement | null = document.querySelector("#darkScreen");
     if(darkScreen == null) return;

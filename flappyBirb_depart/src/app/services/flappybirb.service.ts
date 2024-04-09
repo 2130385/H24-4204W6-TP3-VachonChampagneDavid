@@ -10,7 +10,9 @@ export class FlappyBirbService {
   baseUrl: string = "http://localhost:7065/api/";
   isAuthenticated: boolean = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.isAuthenticated = !!localStorage.getItem('token');
+  }
 
   async Register(username: string, email: string, password: string, passwordConfirm : string): Promise<void> {
     let x = await lastValueFrom(this.http.post<any>(this.baseUrl + "Users/Register", { username, email, password, passwordConfirm }));
@@ -19,42 +21,37 @@ export class FlappyBirbService {
   }
 
   async Login(username: string, password: string): Promise<void> {
-    let token = localStorage.getItem("token");
-    let httpOptions = {
-      headers : new HttpHeaders({
-        'Content-Type' : 'application/json',
-        'Authorization' : 'Bearer ' + token
-      })
-    };
-    let x = await lastValueFrom(this.http.post<any>(this.baseUrl + "Users/Login", { username, password }, httpOptions));
+    let x = await lastValueFrom(this.http.post<any>(this.baseUrl + "Users/Login", { username, password }, this.getHttpOptions()));
     localStorage.setItem('token', x.token);
     this.isAuthenticated = true;
     console.log(x);
   }
 
   async GetPublicScores(): Promise<Score[]> {
-    return await lastValueFrom(this.http.get<any>(this.baseUrl + "Scores/GetPublicScores"));
+    const response = await this.http.get<any>(this.baseUrl + "Scores/GetPublicScores", this.getHttpOptions()).toPromise();
+    return response;
   }
 
   async GetMyScores(): Promise<Score[]> {
-    return await lastValueFrom(this.http.get<any>(this.baseUrl + "Scores/GetMyScores"));
+    const response = await this.http.get<any>(this.baseUrl + "Scores/GetMyScores", this.getHttpOptions()).toPromise();
+    return response;
   }
   
   async ChangeScoreVisibility(scoreid : number): Promise<Observable<any>> {
-    return this.http.put(this.baseUrl + "Scores/ChangeScoreVisibility/" + scoreid, { scoreid })
+    return await this.http.put(this.baseUrl + "Scores/ChangeScoreVisibility/" + scoreid, { scoreid }, this.getHttpOptions())
   }
 
   async PostScore(scoreValue: string, timeInSeconds: string): Promise<void> {
-    const token = localStorage.getItem('token');
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ` + token
-      })
-    };
-
-    let x = await lastValueFrom(this.http.post<any>(this.baseUrl + "Scores/PostScore", { scoreValue, timeInSeconds }, httpOptions));
-    console.log(x);
+    let x = await lastValueFrom(this.http.post<any>(this.baseUrl + "Scores/PostScore", { scoreValue, timeInSeconds }, this.getHttpOptions()));
+    console.log("Score de " + scoreValue + " ajouté au nom de l'utilisateur courant");
   }
 
+  private getHttpOptions(): { headers: HttpHeaders } {
+    const token = localStorage.getItem("token");
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+    return { headers };
+  }
 }

@@ -17,11 +17,19 @@ export class ScoreComponent implements OnInit {
 
   async ngOnInit() {
     this.userIsConnected = sessionStorage.getItem("token") !== null;
+    console.log(localStorage.getItem("token"));
+    this.userIsConnected = this.flappyBirbService.isAuthenticated;
+
     await this.loadPublicScores();
+    await this.loadMyScores();
   }
 
   async changeScoreVisibility(score : Score){
-
+    try {
+      await this.flappyBirbService.ChangeScoreVisibility(score.id);
+    } catch (error) {
+      console.error("Error changing score visibility", error);
+    }
   }
 
 
@@ -31,6 +39,15 @@ export class ScoreComponent implements OnInit {
       console.log(this.publicScores);
     } catch (error) {
       console.error("Error loading public scores:", error);
+    }
+  }
+
+  async loadMyScores() {
+    try {
+      this.myScores = await this.flappyBirbService.GetMyScores();
+      console.log(this.myScores);
+    } catch (error) {
+      console.error("Error loading my scores:", error);
     }
   }
 

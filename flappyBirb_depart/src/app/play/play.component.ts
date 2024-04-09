@@ -12,7 +12,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   game: Game | null = null;
   scoreSent: boolean = false;
-  isAuthenticated: boolean = false;
+  isAuthenticated: boolean | undefined;
 
   constructor(private flappyBirbService: FlappyBirbService) { }
 
