@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TP3.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -155,22 +155,48 @@ namespace TP3.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Score",
+                name: "Scores",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Pseudo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TimeInSeconds = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ScoreValue = table.Column<int>(type: "int", nullable: false),
+                    IsPublic = table.Column<bool>(type: "bit", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Score", x => x.Id);
+                    table.PrimaryKey("PK_Scores", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Score_AspNetUsers_UserId",
+                        name: "FK_Scores_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "4b0a7226-b081-496f-b996-4f37cee69a48", 0, "cac3b649-a76b-4937-8a64-08788332b41a", "user2@gmail.com", false, false, null, "USER2@GMAIL.COM", "USER2", "AQAAAAEAACcQAAAAEBr5IJEvopiFl9N16rf3Wd+wqpM0sib9VG8BX06jE75On5Bsk1l0TRSQuoIN1qBS2A==", null, false, "d0221caa-ca28-449c-a478-a3dc87751dd2", false, "User2" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "fea253ae-b7a8-487f-8263-fc1fd99abcd7", 0, "791f1d95-891b-4949-8839-2780d76690e9", "user1@gmail.com", false, false, null, "USER1@GMAIL.COM", "USER1", "AQAAAAEAACcQAAAAEIVMmpOaIvFFoRw3vJhxkE/5Mf/5A6P0RfhijlBIZ0Rmd0CEg/9kZoBTc8q4wNAJmg==", null, false, "929c329a-6d8d-482f-8f64-9de6aaae6bb3", false, "User1" });
+
+            migrationBuilder.InsertData(
+                table: "Scores",
+                columns: new[] { "Id", "Date", "IsPublic", "Pseudo", "ScoreValue", "TimeInSeconds", "UserId" },
+                values: new object[,]
+                {
+                    { 1, "2024-04-08 22:03:38", true, "User1", 10, "10", "fea253ae-b7a8-487f-8263-fc1fd99abcd7" },
+                    { 2, "2024-04-08 22:03:38", false, "User1", 25, "25", "fea253ae-b7a8-487f-8263-fc1fd99abcd7" },
+                    { 3, "2024-04-08 22:03:38", true, "User2", 5, "5", "4b0a7226-b081-496f-b996-4f37cee69a48" },
+                    { 4, "2024-04-08 22:03:38", false, "User2", 30, "30", "4b0a7226-b081-496f-b996-4f37cee69a48" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -213,8 +239,8 @@ namespace TP3.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Score_UserId",
-                table: "Score",
+                name: "IX_Scores_UserId",
+                table: "Scores",
                 column: "UserId");
         }
 
@@ -236,7 +262,7 @@ namespace TP3.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Score");
+                name: "Scores");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -182,6 +182,7 @@ namespace TP3.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -189,6 +190,48 @@ namespace TP3.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Scores");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = "2024-04-08 22:03:38",
+                            IsPublic = true,
+                            Pseudo = "User1",
+                            ScoreValue = 10,
+                            TimeInSeconds = "10",
+                            UserId = "fea253ae-b7a8-487f-8263-fc1fd99abcd7"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = "2024-04-08 22:03:38",
+                            IsPublic = false,
+                            Pseudo = "User1",
+                            ScoreValue = 25,
+                            TimeInSeconds = "25",
+                            UserId = "fea253ae-b7a8-487f-8263-fc1fd99abcd7"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = "2024-04-08 22:03:38",
+                            IsPublic = true,
+                            Pseudo = "User2",
+                            ScoreValue = 5,
+                            TimeInSeconds = "5",
+                            UserId = "4b0a7226-b081-496f-b996-4f37cee69a48"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Date = "2024-04-08 22:03:38",
+                            IsPublic = false,
+                            Pseudo = "User2",
+                            ScoreValue = 30,
+                            TimeInSeconds = "30",
+                            UserId = "4b0a7226-b081-496f-b996-4f37cee69a48"
+                        });
                 });
 
             modelBuilder.Entity("TP3.Models.User", b =>
@@ -254,6 +297,40 @@ namespace TP3.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "fea253ae-b7a8-487f-8263-fc1fd99abcd7",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "791f1d95-891b-4949-8839-2780d76690e9",
+                            Email = "user1@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER1@GMAIL.COM",
+                            NormalizedUserName = "USER1",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIVMmpOaIvFFoRw3vJhxkE/5Mf/5A6P0RfhijlBIZ0Rmd0CEg/9kZoBTc8q4wNAJmg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "929c329a-6d8d-482f-8f64-9de6aaae6bb3",
+                            TwoFactorEnabled = false,
+                            UserName = "User1"
+                        },
+                        new
+                        {
+                            Id = "4b0a7226-b081-496f-b996-4f37cee69a48",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "cac3b649-a76b-4937-8a64-08788332b41a",
+                            Email = "user2@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER2@GMAIL.COM",
+                            NormalizedUserName = "USER2",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBr5IJEvopiFl9N16rf3Wd+wqpM0sib9VG8BX06jE75On5Bsk1l0TRSQuoIN1qBS2A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "d0221caa-ca28-449c-a478-a3dc87751dd2",
+                            TwoFactorEnabled = false,
+                            UserName = "User2"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -311,7 +388,9 @@ namespace TP3.Migrations
                 {
                     b.HasOne("TP3.Models.User", "User")
                         .WithMany("Scores")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
