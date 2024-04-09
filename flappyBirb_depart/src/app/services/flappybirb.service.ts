@@ -21,40 +21,31 @@ export class FlappyBirbService {
   }
 
   async Login(username: string, password: string): Promise<void> {
-    let x = await lastValueFrom(this.http.post<any>(this.baseUrl + "Users/Login", { username, password }, this.getHttpOptions()));
+    let x = await lastValueFrom(this.http.post<any>(this.baseUrl + "Users/Login", { username, password }));
     localStorage.setItem('token', x.token);
     this.isAuthenticated = true;
     console.log(x);
   }
 
   async GetPublicScores(): Promise<Score[]> {
-    const response = await this.http.get<any>(this.baseUrl + "Scores/GetPublicScores", this.getHttpOptions()).toPromise();
+    const response = await this.http.get<any>(this.baseUrl + "Scores/GetPublicScores").toPromise();
     const sortedScores = response.sort((a : Score, b :  Score) => b.scoreValue - a.scoreValue);
     const top10Scores = sortedScores.slice(0, 10);
     return top10Scores;
   }
 
   async GetMyScores(): Promise<Score[]> {
-    const response = await this.http.get<any>(this.baseUrl + "Scores/GetMyScores", this.getHttpOptions()).toPromise();
+    const response = await this.http.get<any>(this.baseUrl + "Scores/GetMyScores").toPromise();
     return response;
   }
   
   async ChangeScoreVisibility(scoreid : number): Promise<void> {
-    let x = await lastValueFrom(this.http.put(this.baseUrl + "Scores/ChangeScoreVisibility/" + scoreid, { scoreid }, this.getHttpOptions()));
+    let x = await lastValueFrom(this.http.put(this.baseUrl + "Scores/ChangeScoreVisibility/" + scoreid, { scoreid }));
     console.log("La visibilité du score avec l'id " + scoreid + " a été changée");
   }
 
   async PostScore(scoreValue: string, timeInSeconds: string): Promise<void> {
-    let x = await lastValueFrom(this.http.post<any>(this.baseUrl + "Scores/PostScore", { scoreValue, timeInSeconds }, this.getHttpOptions()));
+    let x = await lastValueFrom(this.http.post<any>(this.baseUrl + "Scores/PostScore", { scoreValue, timeInSeconds }));
     console.log("Score de " + scoreValue + " ajouté au nom de l'utilisateur courant");
-  }
-
-  private getHttpOptions(): { headers: HttpHeaders } {
-    const token = localStorage.getItem("token");
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token
-    });
-    return { headers };
   }
 }
