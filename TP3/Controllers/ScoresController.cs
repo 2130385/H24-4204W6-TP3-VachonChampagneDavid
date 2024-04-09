@@ -1,4 +1,5 @@
 ﻿using Labo8api.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,7 @@ namespace TP3.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Score>>> GetPublicScores()
         {
             var publicScores = await _scoreService.GetPublicScoresAsync();
@@ -33,8 +35,13 @@ namespace TP3.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Score>>> GetMyScores()
         {
+            if (User == null)
+            {
+                return Unauthorized();
+            }
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var myScores = await _scoreService.GetMyScoresAsync(userId);
             if (myScores == null)
@@ -46,6 +53,7 @@ namespace TP3.Controllers
 
 
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> ChangeScoreVisibility(int id)
         {
             try
@@ -61,6 +69,7 @@ namespace TP3.Controllers
 
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Score>> PostScore(ScoreDTO scoredto)
         {
             var score = new Score();
